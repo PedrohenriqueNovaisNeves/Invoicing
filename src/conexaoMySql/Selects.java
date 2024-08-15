@@ -14,7 +14,7 @@ public class Selects {
 
                if(resultadoBusca.next()){
                     idUser = resultadoBusca.getInt(idUser);
-                    System.out.println("Usuario localizado " + idUser);
+                    System.out.println("Usuario localizado ");
                }else{
                     System.out.println("Usuario nao localizado em nossa base de dados!");
                }
@@ -35,7 +35,7 @@ public class Selects {
 
                if(resultadoBusca.next()){
                     idFatura = resultadoBusca.getInt(idFatura);
-                    System.out.println("Fatura localizada " + idFatura);
+                    System.out.println("Fatura localizada ");
                }
 
                busca.close();
@@ -78,27 +78,28 @@ public class Selects {
           }
      }
 
-     public void selectionUpdate(String name){
+     public void selectName(String name){
           try{
-               String sqlSearchUser = "Select idUsuario from usuarios where nomeCompleto = (?)";
-               PreparedStatement SearchUser = connection.getConexaoMySQL().prepareStatement(sqlSearchUser);
-               SearchUser.setString(1, name);
-               ResultSet resultSearch = SearchUser.executeQuery();
-               System.out.println("Pare");
+               String sqlSelectName = "Select idUsuario from usuarios where nomeCompleto = (?)";
+               PreparedStatement SelectName = connection.getConexaoMySQL().prepareStatement(sqlSelectName);
+               SelectName.setString(1, name);
+               ResultSet resultSelct = SelectName.executeQuery();
 
                try {
-                    if (resultSearch.next()) {
-                         int idUser = resultSearch.getInt(Integer.parseInt(name));
-                         System.out.println("user located in our database " + idUser);
-                    } else {
-                         System.out.println("User not found");
+                    if (resultSelct.next()) {
+                         int idUser = resultSelct.getInt("idUsuario");
+                         System.out.println("user found");
+                    }else{
+                         System.out.println("user not found");
                     }
                }catch (SQLException e){
-                    System.out.println("Error finding user, Possibly the data doesn't match " + e);
+                    System.out.println("Error finding user");
+                    e.printStackTrace();
                }
 
           }catch (SQLException e){
-               System.out.println("Error finding user " + e);
+               System.out.println("Error in SQL query ");
+               e.printStackTrace();
           }
      }
 }

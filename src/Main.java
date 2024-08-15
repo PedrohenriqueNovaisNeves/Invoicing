@@ -20,6 +20,6 @@ public class Main {
         IdFaturas idFatura = new IdFaturas();
         Selects selects = new Selects();
 
-        selects.selectionUpdate("pedro henrique");
+
     }
 }
