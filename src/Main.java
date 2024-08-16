@@ -19,7 +19,5 @@ public class Main {
         Faturas fatura = new Faturas();
         IdFaturas idFatura = new IdFaturas();
         Selects selects = new Selects();
-
-
     }
 }

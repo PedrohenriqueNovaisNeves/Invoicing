@@ -78,11 +78,11 @@ public class Selects {
           }
      }
 
-     public void selectName(String name){
+     public void selectNameUser(String nameUser){
           try{
                String sqlSelectName = "Select idUsuario from usuarios where nomeCompleto = (?)";
                PreparedStatement SelectName = connection.getConexaoMySQL().prepareStatement(sqlSelectName);
-               SelectName.setString(1, name);
+               SelectName.setString(1, nameUser);
                ResultSet resultSelct = SelectName.executeQuery();
 
                try {
@@ -99,6 +99,30 @@ public class Selects {
 
           }catch (SQLException e){
                System.out.println("Error in SQL query ");
+               e.printStackTrace();
+          }
+     }
+
+     public void selectNameFatura(String nameFatura){
+          try{
+               String sqlSelectInvoice = "select idFatura from faturas where nomeFatura = ?";
+               PreparedStatement SelectInvoice = connection.getConexaoMySQL().prepareStatement(sqlSelectInvoice);
+               SelectInvoice.setString(1, nameFatura);
+               ResultSet ResultSelect = SelectInvoice.executeQuery();
+
+               try{
+                    if(ResultSelect.next()){
+                         int idInvoice = ResultSelect.getInt("idFatura");
+                         System.out.println("Invoice found");
+                    }else {
+                         System.out.println("Invoice not found");
+                    }
+               }catch (SQLException e){
+                    System.out.println("Error finding Invoice");
+                    e.printStackTrace();
+               }
+          }catch (SQLException e){
+               System.out.println("Error finding ");
                e.printStackTrace();
           }
      }
