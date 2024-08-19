@@ -20,7 +20,7 @@ public class Main {
         IdFaturas idFatura = new IdFaturas();
         Selects selects = new Selects();
 
-        selects.SelectAllInvoice("itau");
+        selects.SelectInvoice(1);
 
     }
 }

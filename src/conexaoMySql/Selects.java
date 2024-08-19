@@ -5,80 +5,55 @@ public class Selects {
 
      ConexaoMySql connection = new ConexaoMySql();
 
-     public void selectUser(int idUser){
-          try{
-               String buscaUser = "select idUsuario from usuarios where (?)";
-               PreparedStatement busca = connection.getConexaoMySQL().prepareStatement(buscaUser);
-               busca.setInt(1, idUser);
-               ResultSet resultadoBusca = busca.executeQuery();
+     public void SelectUser(int idUser){
+          String sqlSelectUser = "Select idUsuario from usuarios where idUsuario = ?";
+          try(PreparedStatement SelectUser = connection.getConexaoMySQL().prepareStatement(sqlSelectUser)){
+               SelectUser.setInt(1, idUser);
 
-               if(resultadoBusca.next()){
-                    idUser = resultadoBusca.getInt(idUser);
-                    System.out.println("Usuario localizado ");
-               }else{
-                    System.out.println("Usuario nao localizado em nossa base de dados!");
-               }
+               try(ResultSet ResultSelect = SelectUser.executeQuery()){
 
-               busca.close();
-               connection.FecharConexao();
-          }catch (SQLException e){
-               System.out.println("Erro ao localizar usuario " + e);
-          }
-     }
+                    if(ResultSelect.next()){
+                         int resultIdUser = ResultSelect.getInt("idUsuario");
 
-     public void selectFatura(int idFatura){
-          try{
-               String buscaFatura = "select idFatura from faturas where (?)";
-               PreparedStatement busca = connection.getConexaoMySQL().prepareStatement(buscaFatura);
-               busca.setInt(1, idFatura);
-               ResultSet resultadoBusca = busca.executeQuery();
-
-               if(resultadoBusca.next()){
-                    idFatura = resultadoBusca.getInt(idFatura);
-                    System.out.println("Fatura localizada ");
-               }
-
-               busca.close();
-               connection.FecharConexao();
-
-          }catch (SQLException e){
-               System.out.println("Erro ao localizar fatura " + e);
-          }
-     }
-
-     public void selectFaturaAndUser(int idFatura, int idUser){
-          try{
-               String sqlBuscaFatura = "select nomeFatura from faturas where (?)";
-               String sqlBuscaUser = "select nomeCompleto from usuarios where (?)";
-               PreparedStatement buscaFatura = connection.getConexaoMySQL().prepareStatement(sqlBuscaFatura);
-               PreparedStatement buscaUser = connection.getConexaoMySQL().prepareStatement(sqlBuscaUser);
-               buscaFatura.setInt(1, idFatura);
-               buscaUser.setInt(1, idUser);
-               ResultSet resultadoBuscaFatura = buscaFatura.executeQuery();
-               ResultSet resultadoBuscaUser = buscaUser.executeQuery();
-
-               try {
-                    if((resultadoBuscaFatura.next()) && (resultadoBuscaUser.next())) {
-                         String usuario = resultadoBuscaUser.getString(idUser);
-                         String fatura = resultadoBuscaFatura.getString(idFatura);
-                         System.out.println("Fatura " + fatura + " cadastrada pelo usuario " + usuario);
-
+                         System.out.println("User with id: " + resultIdUser);
                     }else{
-                         System.out.println("Fatura e usuario nao localizados em nossa base de dados");
+                         System.out.println("User not found");
                     }
-               }catch (NumberFormatException e){
-                    System.out.println("Erro na conversao");
+               }catch (SQLException e){
+                    System.out.println("Error finding user");
+                    e.printStackTrace();
                }
-
-               buscaFatura.close();
-               buscaUser.close();
-               connection.FecharConexao();
           }catch (SQLException e){
-               System.out.println("Erro ao localizar fatura e usuario" + e);
+               System.out.println("Error finding");
+               e.printStackTrace();
           }
      }
 
-     public void selectNameUser(String nameUser){
+     public void SelectInvoice(int idInvoice){
+          String sqlSelectInvoice = "select idFatura from faturas where idFatura = ?";
+
+          try(PreparedStatement SelectInvoice = connection.getConexaoMySQL().prepareCall(sqlSelectInvoice)){
+               SelectInvoice.setInt(1, idInvoice);
+
+               try(ResultSet ResultSelect = SelectInvoice.executeQuery()){
+                    if(ResultSelect.next()){
+                         int resultIdInvoice = ResultSelect.getInt("idFatura");
+                         System.out.println("Invoice with id: " + resultIdInvoice);
+                    }else{
+                         System.out.println("User not found");
+                    }
+               }catch (SQLException e){
+                    System.out.println("Error finding user");
+                    e.printStackTrace();
+               }
+
+          }catch (SQLException e){
+               System.out.println("Error finding");
+               e.printStackTrace();
+          }
+     }
+
+     public void SelectNameUser(String nameUser){
           try{
                String sqlSelectName = "Select idUsuario from usuarios where nomeCompleto = (?)";
                PreparedStatement SelectName = connection.getConexaoMySQL().prepareStatement(sqlSelectName);
@@ -97,13 +72,15 @@ public class Selects {
                     e.printStackTrace();
                }
 
+               SelectName.close();
+               connection.FecharConexao();
           }catch (SQLException e){
-               System.out.println("Error in SQL query ");
+               System.out.println("Error finding");
                e.printStackTrace();
           }
      }
 
-     public void selectNameFatura(String nameFatura){
+     public void SelectNameFatura(String nameFatura){
           try{
                String sqlSelectInvoice = "select idFatura from faturas where nomeFatura = ?";
                PreparedStatement SelectInvoice = connection.getConexaoMySQL().prepareStatement(sqlSelectInvoice);
@@ -121,6 +98,9 @@ public class Selects {
                     System.out.println("Error finding Invoice");
                     e.printStackTrace();
                }
+
+               SelectInvoice.close();
+               connection.FecharConexao();
           }catch (SQLException e){
                System.out.println("Error finding ");
                e.printStackTrace();
@@ -155,6 +135,9 @@ public class Selects {
                     System.out.println("Error finding user");
                     e.printStackTrace();
                }
+
+               SelectAll.close();
+               connection.FecharConexao();
           }catch (SQLException e){
                System.out.println("Error finding ");
                e.printStackTrace();
@@ -190,6 +173,9 @@ public class Selects {
                     System.out.println("Error finding User");
                     e.printStackTrace();
                }
+
+               SelectInvoice.close();
+               connection.FecharConexao();
           }catch (SQLException e){
                System.out.println("Error finding");
                e.printStackTrace();
