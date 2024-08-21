@@ -1,6 +1,7 @@
 import conexaoMySql.ConexaoMySql;
 import conexaoMySql.Inserts;
 import conexaoMySql.Selects;
+import conexaoMySql.Updates;
 import usuario.*;
 import java.util.Scanner;
 import validacoes.*;
@@ -19,8 +20,8 @@ public class Main {
         Faturas fatura = new Faturas();
         IdFaturas idFatura = new IdFaturas();
         Selects selects = new Selects();
+        Updates update = new Updates();
 
-        selects.SelectInvoice(1);
 
     }
 }

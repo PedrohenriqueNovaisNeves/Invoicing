@@ -5,6 +5,8 @@ public class Selects {
 
      ConexaoMySql connection = new ConexaoMySql();
 
+     public Selects(){}
+
      public void SelectUser(int idUser){
           String sqlSelectUser = "Select idUsuario from usuarios where idUsuario = ?";
           try(PreparedStatement SelectUser = connection.getConexaoMySQL().prepareStatement(sqlSelectUser)){
@@ -23,6 +25,9 @@ public class Selects {
                     System.out.println("Error finding user");
                     e.printStackTrace();
                }
+
+               SelectUser.close();
+               connection.FecharConexao();
           }catch (SQLException e){
                System.out.println("Error finding");
                e.printStackTrace();
@@ -47,6 +52,8 @@ public class Selects {
                     e.printStackTrace();
                }
 
+               SelectInvoice.close();
+               connection.FecharConexao();
           }catch (SQLException e){
                System.out.println("Error finding");
                e.printStackTrace();
@@ -54,13 +61,12 @@ public class Selects {
      }
 
      public void SelectNameUser(String nameUser){
-          try{
-               String sqlSelectName = "Select idUsuario from usuarios where nomeCompleto = (?)";
-               PreparedStatement SelectName = connection.getConexaoMySQL().prepareStatement(sqlSelectName);
-               SelectName.setString(1, nameUser);
-               ResultSet resultSelct = SelectName.executeQuery();
+          String sqlSelectName = "Select idUsuario from usuarios where nomeCompleto = (?)";
 
-               try {
+          try(PreparedStatement SelectName = connection.getConexaoMySQL().prepareStatement(sqlSelectName)){
+               SelectName.setString(1, nameUser);
+
+               try (ResultSet resultSelct = SelectName.executeQuery()){
                     if (resultSelct.next()) {
                          int idUser = resultSelct.getInt("idUsuario");
                          System.out.println("user found");
@@ -81,13 +87,12 @@ public class Selects {
      }
 
      public void SelectNameFatura(String nameFatura){
-          try{
-               String sqlSelectInvoice = "select idFatura from faturas where nomeFatura = ?";
-               PreparedStatement SelectInvoice = connection.getConexaoMySQL().prepareStatement(sqlSelectInvoice);
-               SelectInvoice.setString(1, nameFatura);
-               ResultSet ResultSelect = SelectInvoice.executeQuery();
+          String sqlSelectInvoice = "select idFatura from faturas where nomeFatura = ?";
 
-               try{
+          try(PreparedStatement SelectInvoice = connection.getConexaoMySQL().prepareStatement(sqlSelectInvoice)){
+               SelectInvoice.setString(1, nameFatura);
+
+               try(ResultSet ResultSelect = SelectInvoice.executeQuery()){
                     if(ResultSelect.next()){
                          int idInvoice = ResultSelect.getInt("idFatura");
                          System.out.println("Invoice found");
@@ -108,13 +113,12 @@ public class Selects {
      }
 
      public void SelectAllUser(String nameUser){
-          try{
-               String sqlSelect = "select * from usuarios where nomeCompleto = ?";
-               PreparedStatement SelectAll = connection.getConexaoMySQL().prepareStatement(sqlSelect);
-               SelectAll.setString(1, nameUser);
-               ResultSet ResultSelect = SelectAll.executeQuery();
+          String sqlSelect = "select * from usuarios where nomeCompleto = ?";
 
-               try{
+          try(PreparedStatement SelectAll = connection.getConexaoMySQL().prepareStatement(sqlSelect)){
+               SelectAll.setString(1, nameUser);
+
+               try(ResultSet ResultSelect = SelectAll.executeQuery()){
                     if(ResultSelect.next()){
                          String NameUser = ResultSelect.getString("nomeCompleto");
                          int IdUser = ResultSelect.getInt("idUsuario");
