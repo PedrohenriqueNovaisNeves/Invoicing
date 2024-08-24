@@ -1,7 +1,4 @@
-import conexaoMySql.ConexaoMySql;
-import conexaoMySql.Inserts;
-import conexaoMySql.Selects;
-import conexaoMySql.Updates;
+import conexaoMySql.*;
 import usuario.*;
 import java.util.Scanner;
 import validacoes.*;
@@ -22,6 +19,6 @@ public class Main {
         Selects selects = new Selects();
         Updates update = new Updates();
 
-
+        update.UpdateEmailUser("pedro@", 1);
     }
 }
