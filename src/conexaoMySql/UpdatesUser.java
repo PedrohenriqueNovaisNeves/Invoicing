@@ -1,11 +1,11 @@
 package conexaoMySql;
 import java.sql.*;
 
-public class Updates {
+public class UpdatesUser {
 
     ConexaoMySql connection = new ConexaoMySql();
 
-    public Updates(){}
+    public UpdatesUser(){}
 
     public void UpdateAllDataUser(String name, String cpf, String rg, String email, int idUser){
         try(PreparedStatement UpdateUser = connection.getConexaoMySQL().prepareStatement("update usuarios set nomeCompleto = ?, cpf = ?, rg = ?, email = ? where idUsuario = ?")){

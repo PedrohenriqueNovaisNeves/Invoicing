@@ -8,8 +8,7 @@ public class Selects {
      public Selects(){}
 
      public void SelectUser(int idUser){
-          String sqlSelectUser = "Select idUsuario from usuarios where idUsuario = ?";
-          try(PreparedStatement SelectUser = connection.getConexaoMySQL().prepareStatement(sqlSelectUser)){
+          try(PreparedStatement SelectUser = connection.getConexaoMySQL().prepareStatement("Select idUsuario from usuarios where idUsuario = ?")){
                SelectUser.setInt(1, idUser);
 
                try(ResultSet ResultSelect = SelectUser.executeQuery()){
@@ -35,9 +34,7 @@ public class Selects {
      }
 
      public void SelectInvoice(int idInvoice){
-          String sqlSelectInvoice = "select idFatura from faturas where idFatura = ?";
-
-          try(PreparedStatement SelectInvoice = connection.getConexaoMySQL().prepareCall(sqlSelectInvoice)){
+          try(PreparedStatement SelectInvoice = connection.getConexaoMySQL().prepareCall("select idFatura from faturas where idFatura = ?")){
                SelectInvoice.setInt(1, idInvoice);
 
                try(ResultSet ResultSelect = SelectInvoice.executeQuery()){
@@ -60,10 +57,8 @@ public class Selects {
           }
      }
 
-     public void SelectNameUser(String nameUser){
-          String sqlSelectName = "Select idUsuario from usuarios where nomeCompleto = (?)";
-
-          try(PreparedStatement SelectName = connection.getConexaoMySQL().prepareStatement(sqlSelectName)){
+     public void SelectNameUser(String nameUser){;
+          try(PreparedStatement SelectName = connection.getConexaoMySQL().prepareStatement("Select idUsuario from usuarios where nomeCompleto = (?)")){
                SelectName.setString(1, nameUser);
 
                try (ResultSet resultSelct = SelectName.executeQuery()){
@@ -86,10 +81,8 @@ public class Selects {
           }
      }
 
-     public void SelectNameFatura(String nameFatura){
-          String sqlSelectInvoice = "select idFatura from faturas where nomeFatura = ?";
-
-          try(PreparedStatement SelectInvoice = connection.getConexaoMySQL().prepareStatement(sqlSelectInvoice)){
+     public void SelectNameFatura(String nameFatura){;
+          try(PreparedStatement SelectInvoice = connection.getConexaoMySQL().prepareStatement("select idFatura from faturas where nomeFatura = ?")){
                SelectInvoice.setString(1, nameFatura);
 
                try(ResultSet ResultSelect = SelectInvoice.executeQuery()){
@@ -113,9 +106,7 @@ public class Selects {
      }
 
      public void SelectAllUser(String nameUser){
-          String sqlSelect = "select * from usuarios where nomeCompleto = ?";
-
-          try(PreparedStatement SelectAll = connection.getConexaoMySQL().prepareStatement(sqlSelect)){
+          try(PreparedStatement SelectAll = connection.getConexaoMySQL().prepareStatement("select * from usuarios where nomeCompleto = ?")){
                SelectAll.setString(1, nameUser);
 
                try(ResultSet ResultSelect = SelectAll.executeQuery()){
@@ -149,9 +140,7 @@ public class Selects {
      }
 
      public void SelectAllInvoice(String nameInvoice){
-          String sqlSelectAllInvoice = "select * from faturas where nomeFatura = ?";
-
-          try(PreparedStatement SelectInvoice = connection.getConexaoMySQL().prepareStatement(sqlSelectAllInvoice)){
+          try(PreparedStatement SelectInvoice = connection.getConexaoMySQL().prepareStatement("select * from faturas where nomeFatura = ?")){
                SelectInvoice.setString(1, nameInvoice);
 
                try(ResultSet ResultSelect = SelectInvoice.executeQuery()){

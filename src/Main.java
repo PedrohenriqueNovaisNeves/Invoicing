@@ -1,7 +1,6 @@
 import conexaoMySql.*;
 import usuario.*;
 import java.util.Scanner;
-import validacoes.*;
 import faturas.*;
 
 public class Main {
@@ -17,8 +16,12 @@ public class Main {
         Faturas fatura = new Faturas();
         IdFaturas idFatura = new IdFaturas();
         Selects selects = new Selects();
-        Updates update = new Updates();
+        UpdatesUser updateUser = new UpdatesUser();
+        UpdateInvoice updateInvoice = new UpdateInvoice();
+        Deletes deleteUser = new Deletes();
 
-        update.UpdateEmailUser("pedro@", 1);
+        deleteUser.DeleteAllData("pedro");
+
+
     }
 }
