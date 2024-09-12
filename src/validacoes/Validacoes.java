@@ -1,7 +1,9 @@
 package validacoes;
+import conexaoMySql.*;
 
 public class Validacoes {
 
+    ConexaoMySql connection = new ConexaoMySql();
 
     public Validacoes(){}
 

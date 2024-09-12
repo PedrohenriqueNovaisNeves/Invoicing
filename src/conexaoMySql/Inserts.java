@@ -7,13 +7,12 @@ public class Inserts {
 
     public Inserts(){}
 
-    public void InsertUser(int idUser, String nameUser, String cpf, String rg, String email){
-        try(PreparedStatement InsertUser = connection.getConexaoMySQL().prepareStatement("insert into usuarios (idUsuario, nomeCompleto, cpf, rg, email) values (?, ?, ?, ?, ?)")){
-            InsertUser.setInt(1, idUser);
-            InsertUser.setString(2, nameUser);
-            InsertUser.setString(3, cpf);
-            InsertUser.setString(4, rg);
-            InsertUser.setString(5, email);
+    public void InsertUser(String nameUser, String cpf, String rg, String email){
+        try(PreparedStatement InsertUser = connection.getConexaoMySQL().prepareStatement("insert into usuarios (nomeCompleto, cpf, rg, email) values (?, ?, ?, ?)")){
+            InsertUser.setString(1, nameUser);
+            InsertUser.setString(2, cpf);
+            InsertUser.setString(3, rg);
+            InsertUser.setString(4, email);
 
             int Insert = InsertUser.executeUpdate();
 
@@ -31,9 +30,8 @@ public class Inserts {
         }
     }
 
-    public void InsertInvoice(int idInvoice, String nameInvoice, double valueInvoice, String descriptionInvoice, String maturity, int idUser){
-        try(PreparedStatement InsertInvoice = connection.getConexaoMySQL().prepareStatement("insert into faturas (idFatura, nomeFatura, valorFatura, descricaoFatura, vencimento, idUsuario) values (?, ?, ?, ?, ?, ?)")){
-            InsertInvoice.setInt(1, idInvoice);
+    public void InsertInvoice(String nameInvoice, double valueInvoice, String descriptionInvoice, String maturity, int idUser){
+        try(PreparedStatement InsertInvoice = connection.getConexaoMySQL().prepareStatement("insert into faturas (nomeFatura, valorFatura, descricaoFatura, vencimento, idUsuario) values (?, ?, ?, ?, ?)")){
             InsertInvoice.setString(2, nameInvoice);
             InsertInvoice.setDouble(3, valueInvoice);
             InsertInvoice.setString(4, descriptionInvoice);
