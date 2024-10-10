@@ -1,4 +1,6 @@
-package conexaoMySql;
+package invoicing.conexaoMySql.updatesUser;
+import invoicing.conexaoMySql.ConexaoMySql;
+
 import java.sql.*;
 
 public class UpdatesUser {

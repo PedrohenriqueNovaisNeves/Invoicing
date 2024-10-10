@@ -1,4 +1,5 @@
-package conexaoMySql;
+package invoicing.conexaoMySql.updateInvoice;
+import invoicing.conexaoMySql.ConexaoMySql;
 import java.sql.*;
 
 public class UpdateInvoice {
@@ -26,7 +27,7 @@ public class UpdateInvoice {
             UpdateAllData.close();
             connection.FecharConexao();
         }catch (SQLException e){
-            System.out.println("Error in updating invoice");
+            System.out.println("Error in updating invoicing.invoice");
             e.printStackTrace();
         }
     }

@@ -1,16 +1,19 @@
-package invoice;
+package invoicing.invoice;
+import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Invoice {
 
     private double value;
     private String name;
-    private String maturity;
+    private java.sql.Date maturity;
     private String descriptionInvoice;
 
     public Invoice(){
         this.value = 0;
         this.name = "";
-        this.maturity = "";
+        this.maturity = null;
         this.descriptionInvoice = "";
     }
 
@@ -22,7 +25,7 @@ public class Invoice {
         return name;
     }
 
-    public String getMaturity(){
+    public Date getMaturity(){
         return maturity;
     }
 
@@ -38,7 +41,7 @@ public class Invoice {
         this.name = name;
     }
 
-    public void setMaturity(String maturity){
+    public void setMaturity(Date maturity){
         this.maturity = maturity;
     }
 

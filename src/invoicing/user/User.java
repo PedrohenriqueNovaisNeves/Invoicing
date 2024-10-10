@@ -1,4 +1,4 @@
-package user;
+package invoicing.user;
 
 public class User {
     private String name;
@@ -53,12 +53,10 @@ public class User {
         }
     }
 
-    public boolean setName1(String name){
-        if(!this.name.equals("")){
-            this.name = name;
-            return true;
-        }else{
-            return false;
-        }
+    public void showData(){
+        System.out.println("Nome: " + name);
+        System.out.println("CPF: " + CPF);
+        System.out.println("RG: " + RG);
+        System.out.println("E-MAIL: " + email);
     }
 }

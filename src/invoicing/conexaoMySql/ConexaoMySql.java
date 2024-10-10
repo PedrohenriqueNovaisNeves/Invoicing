@@ -1,4 +1,4 @@
-package conexaoMySql;
+package invoicing.conexaoMySql;
 import java.sql.*;
 
 public class ConexaoMySql {
